@@ -1,0 +1,3 @@
+Record any changes made here (date, time, who made changes, and what is new)
+
+7/6/2021 - I added a few more errors to 2-moderating.py for other commands that can have missing arguments. I don't know if they're 100% right but seems correct since they have fields that need to be filled in. Also added Cyan coloring to bot console text for bot startup and cleared out useless files in (for cogs that were renamed) "__pychace__". -IFvD

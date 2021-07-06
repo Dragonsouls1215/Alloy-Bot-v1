@@ -9,7 +9,7 @@ class Example(commands.Cog):
   async def onready(self):
     print('Example Cog updated.')
   
-  @commands.command()
+  @commands.command(name= 'ping', aliases = ['Ping'])
   async def ping(self, ctx):
     await ctx.send('Pong!')
 

@@ -24,17 +24,24 @@ class Bot_Commands(commands.Cog):
   async def credits(self, ctx):
     await ctx.send("The developers of this bot are the following: IFrostvsDread, SpookyBoi and Recaffenated.")
 
+  #credits2
   @commands.command(name='credits2', aliases=['cr2', 'CREDITS2', 'CR2'])
   async def credits2(self, ctx):
     await ctx.send("This is a test command for reloading cogs 5x.")
-
+  #richard
   @commands.command(name = 'richard')
   async def richard(self, ctx):
     await ctx.send("MY NAME IS NOT RICHARD")
+
+  #Support Sever
+  @commands.command(name = 'ss', aliases =['SS'])
+  async def ss(self, ctx):
+    await ctx.send("https://discord.gg/YQ2vvVXKcj")
     
   @client.event
   async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
       await ctx.send('Command not found')
+      
 def setup(client):
     client.add_cog(Bot_Commands(client))

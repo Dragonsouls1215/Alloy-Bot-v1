@@ -52,5 +52,21 @@ class Moderation(commands.Cog):
   async def clear_error(self, ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
       await ctx.send('Please specify the amount of messages to delete')
+  #ban error (member not specified)
+  @ban.error
+  async def ban_error(self, ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+      await ctx.send('Please specify the person you are trying to ban')
+  #unban error (member not specified)
+  @unban.error
+  async def unban_error(self, ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+      await ctx.send('Please specify the person you are trying to unban')
+  #kick error (member not specified)
+  @kick.error
+  async def kick_error(self, ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+      await ctx.send('Please specify the person you are trying to kick')
+
 def setup(client):
   client.add_cog(Moderation(client))
