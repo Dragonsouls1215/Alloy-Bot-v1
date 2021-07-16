@@ -37,11 +37,8 @@ class Bot_Commands(commands.Cog):
   @commands.command(name = 'ss', aliases =['SS'])
   async def ss(self, ctx):
     await ctx.send("https://discord.gg/YQ2vvVXKcj")
-    
-  @client.event
-  async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-      await ctx.send('Command not found')
+  
+
       
 def setup(client):
-    client.add_cog(Bot_Commands(client))
+  client.add_cog(Bot_Commands(client))

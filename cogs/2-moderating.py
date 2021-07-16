@@ -47,6 +47,7 @@ class Moderation(commands.Cog):
                 await ctx.send('User has been unbanned')
                 return
                 
+  @commands.command(name='guilds', aliases=['g', 'G','GUILDS'])
   #clear error (number not specified)
   @clear.error
   async def clear_error(self, ctx, error):
@@ -67,6 +68,7 @@ class Moderation(commands.Cog):
   async def kick_error(self, ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
       await ctx.send('Please specify the person you are trying to kick')
+    
 
 def setup(client):
   client.add_cog(Moderation(client))
