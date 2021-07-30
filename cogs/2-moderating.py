@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+from discord.ext.commands import MissingPermissions
 client = commands.Bot(command_prefix='!AB ')
 
 class Moderation(commands.Cog):
@@ -15,20 +15,26 @@ class Moderation(commands.Cog):
   @commands.has_permissions(manage_messages=True)
   async def clear(self, ctx, amount: int):
     await ctx.channel.purge(limit=amount)
-    await ctx.send('Cleared' + amount + ' messages')
+
 
   #kick
   @commands.command(name='kick', aliases=['k','K', 'KICK'])
   @commands.has_permissions(kick_members=True)
   async def kick(self, ctx, member: discord.Member, *, reason=None):
       await member.kick(reason=reason)
+      embed=discord.Embed(title="Task completed!", color=0x003366)
+      embed.set_footer(text = f'I have kicked {member.mention}!')
+      await ctx.send(embed = embed)
     
   #ban
   @commands.command(name='ban', aliases=['b', 'B', 'BAN'])
   @commands.has_permissions(ban_members=True)
   async def ban(self, ctx, member: discord.Member, *, reason=None):
     await member.ban(reason=reason)
-    await ctx.send(f'Banned {member.mention}')
+    embed=discord.Embed(title="Task completed!", color=0x003366)
+    embed.set_footer(text = f'I have banned {member.mention}!')
+    await ctx.send(embed = embed)
+
 
   #unban
   @commands.command(name='unban', aliases=['ub', 'UB', 'UNBAN'])
@@ -47,27 +53,55 @@ class Moderation(commands.Cog):
                 await ctx.send('User has been unbanned')
                 return
                 
-  @commands.command(name='guilds', aliases=['g', 'G','GUILDS'])
   #clear error (number not specified)
   @clear.error
   async def clear_error(self, ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-      await ctx.send('Please specify the amount of messages to delete')
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "Please specify the amount of messages you are trying to clear!" )
+      await ctx.send(embed = embed)
+      
+    if isinstance(error, commands.MissingPermissions):
+      embed=discord.Embed(title="Error", color=0x003366)
+      embed.set_footer(text = "You are missing the 'manage messages' permission!" )
+      await ctx.send(embed = embed)
   #ban error (member not specified)
   @ban.error
   async def ban_error(self, ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-      await ctx.send('Please specify the person you are trying to ban')
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "Please specify who you are trying to ban!" )
+      await ctx.send(embed = embed)
+
+    if isinstance(error, commands.MissingPermissions):
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "You are missing the 'ban members' permission!" )
+      await ctx.send(embed = embed)
+
   #unban error (member not specified)
   @unban.error
   async def unban_error(self, ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-      await ctx.send('Please specify the person you are trying to unban')
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "Please specify who you are trying to unban!" )
+      await ctx.send(embed = embed)
+
+    if isinstance(error, commands.MissingPermissions):
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "You are missing the 'ban members' permission!" )
+      await ctx.send(embed = embed)
   #kick error (member not specified)
   @kick.error
   async def kick_error(self, ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-      await ctx.send('Please specify the person you are trying to kick')
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "Please specify who you are trying to kick!" )
+      await ctx.send(embed = embed)
+
+    if isinstance(error, commands.MissingPermissions):
+      embed=discord.Embed(title="Error!", color=0x003366)
+      embed.set_footer(text = "You are missing the 'kick members' permission!" )
+      await ctx.send(embed = embed)
     
 
 def setup(client):
