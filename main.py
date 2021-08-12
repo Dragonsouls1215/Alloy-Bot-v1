@@ -5,18 +5,13 @@ from keep_alive import keep_alive
 from itertools import cycle
 my_secret = os.environ['TOKEN']
 
-
-
-
 client = commands.Bot(command_prefix='!AB ', help_command=commands.MinimalHelpCommand())
 status = cycle([
     '!AB help', 'A truely adorable robot!', '!AB help', 
     'FLIPPYR, MY NAME IS NOT RICHARD!'
 ])
-bclient = discord.client
-client.remove_command('help')
 
-#Variables
+client.remove_command('help')
 
 #startup
 @client.event
@@ -25,7 +20,10 @@ async def on_ready():
     change_status.start()
     print('{0.user} is online. '.format(client))
 
-#status loop
+#Variables
+bclient = discord.client
+
+#Status loop
 @tasks.loop(seconds=45)
 async def change_status():
     await client.change_presence(activity=discord.Game(next(status)))
@@ -66,17 +64,24 @@ for filename in os.listdir('./cogs'):
 @client.command() 
 @commands.has_role(860304775592935457)
 async def slist(ctx):
+
   serverlist = client.guilds
+  
+  
   op = str(serverlist)
+  
 
   slWrite = open("serverlist.md", 'w')
-  slWrite.write(f"Server List: {op}")
+  slWrite.write(f"""
+  
+  Server List: {op}, 
+  """)
   slWrite.close()
 
   embed = discord.Embed(title = "Task Complete!", color = 0x003366)
   embed.add_field(name = f"{ctx.author}, Refer to the following file:", value = "serverlist.md", inline = False)
-  embed.add_field(name = "Or", value = "Below this embed is the list (if it doesn't print, it means that the list is too long)", inline = True)
-  embed.set_footer(text = "You can also check serverlist.md as well using the following link: https://replit.com/@IFrostvsDread/Alloy-Bot-V1")
+  embed.add_field(name = "Or", value = "Below this embed is the list (if it doesn't print, it means that the list is too long)", inline = False)
+  embed.set_footer(text = "You can also check serverlist.md by using the following link as well: https://replit.com/@IFrostvsDread/Alloy-Bot-V1")
   await ctx.send(embed = embed)
   await ctx.send(f"```List of servers with ID's, Names, Shards, and Member Counts: {op}```")
 
@@ -85,29 +90,29 @@ async def slist(ctx):
 async def help(ctx):
   embed=discord.Embed(title="Bot Commands", color=0x003366)
 
-  embed.add_field(name = "help", value = "prints this message | Aliases: Help, h , H", inline = False)
-  embed.add_field(name = "online", value = "prints 'Good morning', test command | Aliases: none", inline = False)
-  embed.add_field(name = "SiB", value = "prints 'Sire is bipolar', test command | Aliases: sib, SIB", inline = False)
-  embed.add_field(name = "credits", value = "prints the credits for the bot | Aliases: CREDITS, cr, CR", inline = False)
-  embed.add_field(name = "credits2", value = "prints test command | Aliases: CREDITS2, cr2, CR2", inline = False)
-  embed.add_field(name = "richard", value = "prints 'MY NAME IS NOT RICHARD' (Joke command because Flippyr keeps calling him Richard Bot) | Aliases: none", inline = False)
+  embed.add_field(name = "help", value = "prints this message | Aliases: Help, h , H", inline = True)
+  embed.add_field(name = "online", value = "prints 'Good morning', test command | Aliases: none", inline = True)
+  embed.add_field(name = "SiB", value = "prints 'Sire is bipolar', test command | Aliases: sib, SIB", inline = True)
+  embed.add_field(name = "credits", value = "prints the credits for the bot | Aliases: CREDITS, cr, CR", inline = True)
+  embed.add_field(name = "credits2", value = "prints test command | Aliases: CREDITS2, cr2, CR2", inline = True)
+  embed.add_field(name = "richard", value = "prints 'MY NAME IS NOT RICHARD' (Joke command because Flippyr keeps calling him Richard Bot) | Aliases: none", inline = True)
   await ctx.send(embed=embed)
 
   embed=discord.Embed(title="Staff Commands",color=0x003366)
 
-  embed.add_field(name = "clear", value = "Allows the user to clear a number of messages | Aliases: c, C , CL", inline = False)
-  embed.add_field(name = "kick", value = "Allow's the user to kick other users, requires 'kick members' permission | Aliases: k, K , KICK", inline = False)
-  embed.add_field(name = "ban", value = "Allows the user to ban users, requires 'ban members' permission | Aliases: b, B, BAN", inline = False)
-  embed.add_field(name = "unban", value = "Allows the user to unban users, requires 'ban members' permission | Aliases: ub, UB, UNBAN", inline = False)
-  embed.set_footer(text= 'These commands will only work if you have "Administrator" or the matching permissions!')
+  embed.add_field(name = "clear", value = "Allows the user to clear a number of messages | Aliases: c, C , CL", inline = True)
+  embed.add_field(name = "kick", value = "Allow's the user to kick other users, requires 'kick members' permission | Aliases: k, K , KICK", inline = True)
+  embed.add_field(name = "ban", value = "Allows the user to ban users, requires 'ban members' permission | Aliases: b, B, BAN", inline = True)
+  embed.add_field(name = "unban", value = "Allows the user to unban users, requires 'ban members' permission | Aliases: ub, UB, UNBAN", inline = True)
+  embed.set_footer(text= 'These commands will only work if you have "Administrator" or the matching permissions for each command!')
   await ctx.send(embed=embed)
 
   embed=discord.Embed(title="Developer Commands", color=0x003366)
 
-  embed.add_field(name = "loadcog", value = "Loads the cogfile inputted", inline = False)
-  embed.add_field(name = "unloadcog", value = "Unloads the cogfile inputted", inline = False)
-  embed.add_field(name = "reloadcog", value = "Reloads the cogfile inputted", inline = False)
-  embed.set_footer(text="Developer commands only work if you have 'Alloy Bot Developer' in my test server!")
+  embed.add_field(name = "loadcog", value = "Loads the cogfile inputted", inline = True)
+  embed.add_field(name = "unloadcog", value = "Unloads the cogfile inputted", inline = True)
+  embed.add_field(name = "reloadcog", value = "Reloads the cogfile inputted", inline = True)
+  embed.set_footer(text="Developer commands only work in my test server and are reserved for 'Alloy Bot Developers'!")
   em = discord.Embed(description='requested by:\n{0}'.format(ctx.author))
   em.set_thumbnail(url=ctx.author.avatar_url)
   
@@ -119,14 +124,14 @@ async def help(ctx):
 async def serverlisterror(ctx, error):
   if isinstance(error, commands.MissingRole):
     embed = discord.Embed(title= "Task Result", color=0x003366)
-    embed.add_field(name = "Error!", value = 'Reason: You need to have the "Alloy Bot Developer" role in my test server!', inline = False)
+    embed.add_field(name = "Error!", value = 'Reason: You need to have the "Alloy Bot Developer" role in my test server!', inline = True)
     await ctx.send(embed = embed)
 
 @reloadcog.error
 async def reloadcogerror(ctx, error):
   if isinstance(error, commands.MissingRole):
     embed=discord.Embed(title="Task Result", color=0x003366)
-    embed.add_field(name="Error!",value = "Reason: Only users with 'Alloy Bot Developer' in my test server can run this command", inline = False)
+    embed.add_field(name="Error!",value = "Reason: Only users with 'Alloy Bot Developer' in my test server can run this command", inline = True)
     await ctx.send(embed = embed)
 
   if isinstance(error, commands.MissingRequiredArgument):
@@ -139,7 +144,7 @@ async def loadcogerror(ctx, error):
   if isinstance(error, commands.MissingRole):
     embed=discord.Embed(title="Task Result", color=0x003366)
     embed.add_field(name = "Error!", value = "Reason: You do not have permission to use this command!")
-    embed.add_field(name = "Requirements", value = 'You need to have the "Alloy Bot Developer" role in my test server!', inline = False) 
+    embed.add_field(name = "Requirements", value = 'You need to have the "Alloy Bot Developer" role in my test server!', inline = True) 
     await ctx.send(embed = embed)
 
   if isinstance(error, commands.MissingRequiredArgument):
@@ -152,7 +157,7 @@ async def unloadcogerror(ctx, error):
   if isinstance(error, commands.MissingRole):
     embed=discord.Embed(title="Task Result", color=0x003366)
     embed.add_field(name = "Error!", value = "Reason: You do not have permission to use this command!")
-    embed.add_field(name = "Requirements", value = 'You need to have the "Alloy Bot Developer" role in my test server!', inline = False)
+    embed.add_field(name = "Requirements", value = 'You need to have the "Alloy Bot Developer" role in my test server!', inline = True)
     await ctx.send(embed = embed)
 
   if isinstance(error, commands.MissingRequiredArgument):

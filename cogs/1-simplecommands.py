@@ -9,36 +9,42 @@ class Bot_Commands(commands.Cog):
   @commands.Cog.listener()
   async def onready(self):
         print('BotCommands Cog updated.')
+
   #online      
   @commands.command()
   async def online(self, ctx):
-    await ctx.send('Good morning!')
+    embed=discord.Embed(title="Task Complete!", color=0x003366)
+    embed.set_footer(text = "Good morning!" )
+    await ctx.send(embed = embed)
   
   #Sire is bipolar
   @commands.command(name='SiB', aliases=['sib','SIB'], description="As a joke for a friend")
   async def SiB(self, ctx):
-    await ctx.channel.send('Sire is bipolar.')
+    embed=discord.Embed(title="Task Complete!", color=0x003366)
+    embed.set_footer(text = "Sire is bipolar!" )
+    await ctx.send(embed = embed)
 
-  #credits
+  #Credits
   @commands.command(name='credits', aliases=['cr', 'CREDITS', 'CR'])
   async def credits(self, ctx):
-    await ctx.send("The developers of this bot are the following: IFrostvsDread, SpookyBoi and Recaffenated.")
-
-  #credits2
-  @commands.command(name='credits2', aliases=['cr2', 'CREDITS2', 'CR2'])
-  async def credits2(self, ctx):
-    await ctx.send("This is a test command for reloading cogs 5x.")
-  #richard
+    embed=discord.Embed(title="Credits", color=0x003366)
+    embed.add_field(name= "Recaff", value = "Helping with some of the programming and keeping me sane when needed.", inline = False)
+    embed.add_field(name= "SpookyBoi", value = "Helped with some of the error codes and made the bot's website.", inline = False)
+    embed.add_field(name= "IFrostvsDread", value = "Owner of the bot and maintaining code as time goes on.", inline = False)
+    embed.set_footer(text = "Thank you for your contributions to Alloy Bot!" )
+    await ctx.send(embed = embed)
+ 
+  #Richard
   @commands.command(name = 'richard')
   async def richard(self, ctx):
-    await ctx.send("MY NAME IS NOT RICHARD")
+    embed=discord.Embed(title="Task Complete!", color=0x003366)
+    embed.set_footer(text = '"His name should be Richard for the funny nickname" -Flippyr')
+    await ctx.send(embed = embed)
 
   #Support Sever
   @commands.command(name = 'ss', aliases =['SS'])
   async def ss(self, ctx):
-    await ctx.send("https://discord.gg/YQ2vvVXKcj")
-  
-
-      
+    await ctx.send("https://discord.gg/padZEPyz4Z")
+        
 def setup(client):
   client.add_cog(Bot_Commands(client))
