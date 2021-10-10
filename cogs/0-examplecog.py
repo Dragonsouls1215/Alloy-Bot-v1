@@ -11,7 +11,7 @@ class Example(commands.Cog):
   
   @commands.command(name= 'ping', aliases = ['Ping'])
   async def ping(self, ctx):
-    await ctx.send('Pong!')
+    await ctx.send('Pong!', delete_after = 3)
 
 def setup(client):
   client.add_cog(Example(client))
