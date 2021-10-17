@@ -13,10 +13,14 @@ class Updatelist(commands.Cog):
 #Commands
   @commands.command()
   async def updates(self, ctx):
-    embed=discord.Embed(title="Latest Updates to my coding:", color=0x003366)
-    embed.add_field(name = "10/03/2021", value = "Messed around with ban command to make sure it works (which it stil does, must've been a role hierarchy issue. -IFvD", inline = False )
+    embed=discord.Embed(title="Latest Updates to Alloy:", color=0x003366)
+    embed.add_field(name = "10/16/2021", value = """Added DnD Dice rolls. The commands are the following:
 
-    embed.add_field(name = "10/03/2021", value = "Possibly going to be adding information for the mobile game 'Endless Arena' (Characters, abilities, and set bonuses to prioritize)", inline = False )
+    Rolls - Displays how to start a specific roll
+    Roll - Starts a random number roll based off what type you chose.
+    """, inline = False )
+
+    embed.add_field(name = "10/16/2021", value = "Fixed some commands not working properly because of 'await ctx.message.delete()' deleting Alloy's messages instead of deleting the sender's message. I will be looking into a fix for that eventually. -IFvD", inline = False )
     await ctx.send(embed = embed)  
   
   @commands.command() 

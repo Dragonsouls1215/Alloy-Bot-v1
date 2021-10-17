@@ -13,7 +13,7 @@ class Simple_Commands(commands.Cog):
   #online      
   @commands.command()
   async def online(self, ctx):
-    await ctx.message.delete()
+    
     embed=discord.Embed(title="Task Complete!", color=0x003366)
     embed.set_footer(text = "Good morning!" )
     await ctx.send(embed = embed, delete_after = 3)
@@ -29,7 +29,7 @@ class Simple_Commands(commands.Cog):
   #Credits
   @commands.command(name='credits', aliases=['cr', 'CREDITS', 'CR'])
   async def credits(self, ctx):
-    await ctx.message.delete()
+    
     embed=discord.Embed(title="Credits", color=0x003366)
     embed.add_field(name= "Recaff", value = "Helping with some of the programming and keeping me (IFvD) sane when needed.", inline = False)
     embed.add_field(name= "SpookyBoi", value = "Helped with some of the error codes and made the bot's original website.", inline = False)
@@ -40,7 +40,7 @@ class Simple_Commands(commands.Cog):
   #Richard
   @commands.command(name = 'richard', aliases= ["Richard"])
   async def richard(self, ctx):
-    await ctx.message.delete()
+    
     embed=discord.Embed(title="Task Complete!", color=0x003366)
     await ctx.send(embed = embed, delete_after = 8)
     await ctx.send("https://media.discordapp.net/attachments/873584600167878736/885681573914087425/richardbot.png", delete_after = 8)
