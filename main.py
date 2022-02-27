@@ -59,27 +59,6 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-#Server List
-@client.command() 
-@commands.has_role(860304775592935457)
-async def slist(ctx):
-
-  serverlist = client.guilds
-  op = str(serverlist)
-  slWrite = open("serverlist.md", 'w')
-  slWrite.write(f"""
-  Server List: {op}, 
-  """)
-  slWrite.close()
-
-  embed = discord.Embed(title = "Task Complete!", color = 0x003366)
-  embed.add_field(name = f"{ctx.author}, Refer to the following file:", value = "serverlist.md", inline = False)
-  embed.add_field(name = "Or", value = "Below this embed is the list (if it doesn't print, it means that the list is too long)", inline = False)
-  embed.set_footer(text = "You can also check serverlist.md by using the following link as well: https://replit.com/@IFrostvsDread/Alloy-Bot-V1")
-  await ctx.send(embed = embed, delete_after = 5)
-  await ctx.send(f"""List of servers Iam in with ID's, Names, Shards, and Member Counts:""", delete_after = 30)
-  await ctx.send(f"""```{op}```""", delete_after = 30)
-
 #Help Command
 @client.command(name= "help", aliases=["h", "H", "HELP"]) 
 async def help(ctx):
@@ -87,7 +66,7 @@ async def help(ctx):
 
   embed.add_field(name = "help", value = "prints this message | Aliases: Help, h , H", inline = True)
   embed.add_field(name = "online", value = "prints 'Good morning', test command | Aliases: none", inline = True)
-  embed.add_field(name = "SiB", value = "prints 'Sire is bipolar', test command | Aliases: sib, SIB", inline = True)
+  embed.add_field(name = "UiB", value = "Calls inserted text 'Bipolar' | Aliases: uib, UIB", inline = True)
   embed.add_field(name = "credits", value = "prints the credits for the bot | Aliases: CREDITS, cr, CR", inline = True)
   embed.add_field(name = "credits2", value = "prints test command | Aliases: CREDITS2, cr2, CR2", inline = True)
   embed.add_field(name = "richard", value = "Aliases: none", inline = True)
@@ -126,13 +105,6 @@ async def createchannel(ctx, channelname):
 
                 
 #Error's
-@slist.error
-async def serverlisterror(ctx, error):
-  if isinstance(error, commands.MissingRole):
-    embed = discord.Embed(title= "Task Result", color=0x003366)
-    embed.add_field(name = "Error!", value = 'Reason: You need to have the "Alloy Bot Developer" role in my test server!', inline = True)
-    await ctx.send(embed = embed, delete_after = 5)
-
 @reloadcog.error
 async def reloadcogerror(ctx, error):
   if isinstance(error, commands.MissingRole):
